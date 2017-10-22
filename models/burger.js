@@ -1,26 +1,29 @@
-/*
-Setting up a model to interface with the Database
-*/
+'use strict';
+var Sequelize = require('sequelize');
 
-var orm = require('../config/orm.js');
-
-var burger = {
-	all: function(cb) {
-		orm.all('burger', function(res){
-			cb(res);
-		});
-	},
-	//cols and vals are arrays
-	create: function(cols, vals, cb) {
-		orm.create('burger', cols, vals, function(res){
-			cb(res);
-		});
-	},
-	update: function(objColVals, condition, cb) {
-		orm.update('burger', objColVals, condition, function(res){
-			cb(res);
-		});
-	}
+module.exports = function(sequelize, DataTypes) {
+  var burger = sequelize.define('burger', {
+    burger_name: DataTypes.STRING,
+    devoured: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: Date.now()
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: Date.now()
+    }
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    }
+  });
+  return burger;
 };
-
-module.exports = burger;

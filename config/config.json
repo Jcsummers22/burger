@@ -1,0 +1,8 @@
+{
+    "development": {
+      "username": "root",
+      "password": "crew4life",
+      "database": "burgers_db",
+      "host": "localhost: 3306",
+      "dialect": "mysql"
+    },
